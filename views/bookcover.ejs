@@ -1,0 +1,42 @@
+<%- include("header.ejs") %>
+
+
+<div class="container bg-dark mt-4">
+    <div class="row">
+        <div class="col-md-6 p-md-5 p-4">
+            <img 
+            class="img-fluid"
+            src="<%=url%>" alt="<%=title%>" style="height: 100%; width: 100%;">
+        </div>
+        <div class="col-md-6 text-white p-md-5 p-4" >
+            <h1 class="display-5"><%if(locals.title)%><%= title %></h1>
+            <!-- If no notes exists in databse -->
+            <%if(!locals.notes){ %>
+            <form action="/addnotes" method="post" class="mt-4 form-group">
+            <div class="input-group">
+            <input type="text" name="olid" id="" value="<%=olid%>" hidden>
+            <input type="text" name="title" id="" value="<%=title%>"" hidden>
+            <textarea class="form-control py-3 px-3 " id="exampleFormControlTextarea1" rows="8" placeholder="Add Notes" name="notes"></textarea>
+            <button class="form-group btn btn-primary">Submit</button>
+            </div>
+            </form>
+            <% } %>
+            <!-- If notes exist in datase -->
+            <% if(locals.notes){ %>
+            <p class="heading mt-5">Notes</p>
+            <p style="max-height:calc(100vh - 55vh); overflow-y: scroll;" class="mt-2 scroll text-secondary">
+            
+                <%=notes%>
+            <% }%>
+            </p>
+
+        </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#body').show();
+        // $('#msg').hide();
+    });
+</script>

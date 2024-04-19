@@ -1,0 +1,33 @@
+<%- include("header.ejs") %>
+
+<div class="container bg-dark mt-5 ">
+    <div class="row pt-5 pb-3">
+            <form action="/search" method="post">
+            <div class="input-group">
+                <input type="text" name="name" id="" class="form-control" placeholder="Search Book(s)" style="height: 45px;">
+                <button class="btn btn-primary border-secondary">Submit</button>
+            </div>
+        </form>
+
+        </div>
+        <div class="row p-2">
+        <%  if(locals.data){
+            for (let index = 0; index < data.length; index++) { 
+                if(data[index].edition_key){        
+        %>
+            <div style="height: auto; background-color: white; margin-bottom: 10px; border-radius: 15px;">
+            <form action="/bookcover" method="post">
+            <div class="row">
+            <div class="col-md-11 col-8">
+            <div class="me-auto pt-2"> <%= index+1 %> <%= data[index].title %></div>
+            </div>
+            <div class="col-md-1 col-4 d-flex justify-content-center align-items-center text-end">
+            <input type="text" value="<%= data[index].edition_key[0] %>" name="olid" hidden>
+            <input type="text" value="<%= data[index].title %>" name="title" hidden>
+            <button onclick="this.form.submit()" class="ps-5 btn hearticon"><i class="bi bi-heart"></i></button>
+            </div></div>
+            </form>
+        </div>
+    <% }}}; %>
+        </div>    
+</div>
